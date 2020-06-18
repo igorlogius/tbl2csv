@@ -15,7 +15,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: node:12
+    runs-on: node
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
