@@ -12,15 +12,12 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - name: Checkout Code 
     - uses: actions/checkout@v2
-    - name: Create Node.js ${{ matrix.node-version }} Environment
+    - name: Build with Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install Web Extenstion Module (+Deps)
     - run: npm install web-ext
-    - name: Run web-ext build
     - run: node_modules/.bin/web-ext build
       env:
         CI: true
