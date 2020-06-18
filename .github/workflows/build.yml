@@ -5,6 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
+    - name: Cache multiple paths
+      uses: actions/cache@v2
+      with:
+        path: |
+          **/node_modules
     - uses: actions/setup-node@v1
       with:
         node-version: '12'
