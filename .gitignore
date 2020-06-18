@@ -104,5 +104,7 @@ dist
 .tern-port
 
 # Web-Extension Artefacts files
-/web-ext-artefacts/
-/web-ext-artefacts/*
+/web-ext-artifacts/
+
+# build script
+/build.sh
