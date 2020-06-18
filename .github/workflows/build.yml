@@ -10,6 +10,7 @@ jobs:
       with:
         path: |
           **/node_modules
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
     - uses: actions/setup-node@v1
       with:
         node-version: '12'
