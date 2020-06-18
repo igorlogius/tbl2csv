@@ -104,7 +104,10 @@ dist
 .tern-port
 
 # Web-Extension Artefacts files
-/web-ext-artifacts/
+/tbl2csv*zip
 
 # build script
 /build.sh
+
+/package.json
+/package-lock.json
