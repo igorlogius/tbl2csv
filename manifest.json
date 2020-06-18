@@ -1,0 +1,23 @@
+{
+    "name": "tbl2csv",
+    "description": "Adds a context menu item that allows to export tables or lists as csv as well as an toolbar icon/button to highlight the exportable elements",
+    "version": "1.2.7",
+    "manifest_version": 2,
+    "icons": {
+	"128": "icon.png"
+    },
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+        "menus",
+	"activeTab"
+    ],
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_title": "highlight exports"
+    },
+    "optional_permissions" : [
+	"tabs"
+    ]
+}
