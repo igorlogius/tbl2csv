@@ -26,6 +26,7 @@ jobs:
       uses: actions/create-release@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          CI: true
       with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
@@ -36,8 +37,9 @@ jobs:
       uses: actions/upload-release-asset@v1
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
       with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./web-ext-artifacts/*.zip
-          asset_name: my-artifact.zip
+          asset_path: ./web-ext-artifacts/tbl2csv-1.2.7.zip
+          asset_name: tbl2csv-1.2.7.zip
           asset_content_type: application/zip
