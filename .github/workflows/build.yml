@@ -1,26 +1,19 @@
 name: Node.js CI
-
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x]
-    env:
-       CI: true
     steps:
     - uses: actions/checkout@v2
     - name: Build with Node.js ${{ matrix.node-version }}
-    - uses: actions/setup-node@v1
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install web-ext
     - run: node_modules/.bin/web-ext build
-      
     - uses: actions/upload-artifact@v2
       with:
         name: tbl2csv.zip
