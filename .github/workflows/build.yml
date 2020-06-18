@@ -10,7 +10,7 @@ jobs:
         node-version: '12'
     - run: npm install web-ext
     - run: node_modules/.bin/web-ext build
-    - uses: actions/upload-artifact@v1
+    - uses: actions/upload-artifact@v2
       with:
         name: tbl2csv
-        path: web-ext-artifacts/tbl2csv*.zip
+        path: web-ext-artifacts/
