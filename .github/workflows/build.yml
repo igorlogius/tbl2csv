@@ -13,4 +13,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: tbl2csv
-        path: ./web-ext-artifacts/tbl2csv*.zip
+        path: web-ext-artifacts/tbl2csv*.zip
