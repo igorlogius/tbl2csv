@@ -14,8 +14,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12'
-    - run: npm install web-ext
-    - run: node_modules/.bin/web-ext build
+    - run: ./build.sh 
     - uses: actions/upload-artifact@v2
       with:
-        path: web-ext-artifacts/
+        path: *.zip 
