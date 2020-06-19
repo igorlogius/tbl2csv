@@ -18,5 +18,4 @@ jobs:
     - run: node_modules/.bin/web-ext build
     - uses: actions/upload-artifact@v2
       with:
-        name: tbl2csv
         path: web-ext-artifacts/
