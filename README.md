@@ -10,21 +10,13 @@ https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/
 
 - web-ext (https://github.com/mozilla/web-ext)
 
-## Development / Testing
-```bash
-git clone https://github.com/igorlogius/tbl2csv.git
-cd tbl2csv/
-node_modules/.bin/web-ext run
-```
-
 ## Build Ext. Package
 
 ```bash
 git clone https://github.com/igorlogius/tbl2csv.git
 cd tbl2csv/
-npm install web-ext
-node_modues/.bin/web-ext build -a .
+./build.sh
 ```
 
-Import tbl2csv-x.y.z.zip into your your browser
+Import tbl2csv-x.y.z.zip into your browser
 
