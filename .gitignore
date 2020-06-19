@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # Web-Extension Artefacts files
-/tbl2csv*zip
+/*.zip
 
 # build script
 /build.sh
