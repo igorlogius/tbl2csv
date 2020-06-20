@@ -1,6 +1,6 @@
 {
     "name": "tbl2csv",
-    "description": "Adds a context menu item that allows to export tables or lists as csv as well as an toolbar icon/button to highlight the exportable elements",
+    "description": "Adds a context menu item that allows to export tables or lists as csv as well as an toolbar button to highlight the exportable elements",
     "version": "1.2.7",
     "manifest_version": 2,
     "icons": {
