@@ -1,20 +1,22 @@
-name: Node.js CI
+name: Artefact Builder
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
-    - name: Cache multiple paths
-      uses: actions/cache@v2
-      with:
-        path: |
-          **/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12'
+#    - name: Cache multiple paths
+#      uses: actions/cache@v2
+#      with:
+#        path: |
+#          **/node_modules
+#        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+#    - uses: actions/setup-node@v1
+#      with:
+#        node-version: '12'
+    - name: ${{ env.name }}-name
     - run: ./build.sh
     - uses: actions/upload-artifact@v2
       with:
-        path: ./*.zip 
+        name: ${{ github.workspace }}
+        path: ./src/
