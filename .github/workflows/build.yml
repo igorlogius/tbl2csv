@@ -9,5 +9,5 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ github.workspace }}
+        name: ${{ github.repository }}
         path: ./src/
