@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 
-    - uses: actions/checkout@v2 
+      uses: actions/checkout@v2 
     - name: Upload Artifact
-    - uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v2
       with:
         name: ${{ github.workspace }}
         path: ./src/
