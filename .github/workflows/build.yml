@@ -7,9 +7,10 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v2 
     - name: set artversion
+      run: echo "::set-env name=REPONAME::$(basename `pwd`)"
       run: echo "::set-env name=ARTVERSION::$(grep '"version"' ./src/manifest.json  | cut -d'"' -f4)"
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.ARTVERSION }}
+        name: ${{ env.REPONAME }}-${{ env.ARTVERSION }}.xpi
         path: ./src/
