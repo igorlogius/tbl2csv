@@ -4,6 +4,7 @@
 https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/
 
 ## Usage:  
+```
 wget https://github.com/igorlogius/tbl2csv/archive/master.zip
 unzip master.zip
 zip -j "tbl2csv-$(grep '"version"' tbl2csv-master/src/manifest.json  | cut -d'"' -f4).xpi" ./tbl2csv-master/src/*
