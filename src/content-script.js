@@ -140,6 +140,9 @@ let hlon = false;
 
 // register message listener 
 browser.runtime.onMessage.addListener( (message) => {
+	if(message.isOn) {
+		return (typeof window.tbl2csv !== 'undefined');
+	}
 	if(message.hlDivTbls) {
 		highlightDivTables();
 		var sheet = window.document.styleSheets[0];

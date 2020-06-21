@@ -3,39 +3,39 @@ const extId = 'tbl2csv';
 
 let hlexportables = {};
 
-function onError(e){
-	console.log(`${extId}::onError: ${e}`);
+function onError(e){console.log(`${extId}::onError: ${e}`);}
+
+async function onUpdated(tabId, changeInfo, tabInfo) { 
+	if(typeof tabId !== 'undefined' ) {
+		browser.tabs.sendMessage(tabId, {"isOn": true}).then( () => {  // activeTab permission
+			hlexportables[tabId] = true; 
+			browser.browserAction.setBadgeText({"text": "on", "tabId": tabId}); // menus permission
+		}).catch( (err) => {
+			browser.browserAction.setBadgeText({"text": "", "tabId": tabId}); // menus permission
+			delete hlexportables[tabId];
+		}); 
+	}
 }
 
-// changeInfo req. tabs permissions
-browser.tabs.onUpdated.addListener( async (tabId, changeInfo, tabInfo) => {  // tabs permission
-	// reset icon badge when tab changes to something we dont know yet
-	if( tabId && changeInfo.url && hlexportables[tabId] ){
-		browser.browserAction.setBadgeText({text: "", tabId: tabInfo.id});
-		delete hlexportables[tabId];
-	}
-});
+async function onBrowserActionClicked(tab) { 
+	if(typeof tab.id !== 'undefined' ) {
+		try { 
+			await browser.tabs.executeScript({file: 'content-script.js'}); // activeTab permission
+			if(typeof hlexportables[tab.id] === 'undefined') { 
+				browser.browserAction.setBadgeText({"text": "on", "tabId": tab.id}); // menu permission
+				hlexportables[tab.id] = true; 
 
-browser.browserAction.setBadgeBackgroundColor({color: "green"});
-
-browser.browserAction.onClicked.addListener( async (tab) => {
-	
-	if(typeof tab.id !== 'undefined') {
-		
-		await browser.tabs.executeScript({file: 'content-script.js'});
-
-		if(typeof hlexportables[tab.id] === 'undefined') { 
-		        browser.browserAction.setBadgeText({text: "on", tabId: tab.id});
-			hlexportables[tab.id] = true; 
-
-		}else { 
-		        browser.browserAction.setBadgeText({text: "", tabId: tab.id});
-			delete hlexportables[tab.id];
+			}else { 
+				browser.browserAction.setBadgeText({"text": "", "tabId": tab.id}); // menu permission
+				delete hlexportables[tab.id];
+			}
+			await browser.tabs.sendMessage(tab.id, {"hlDivTbls": true, "hlToggle": hlexportables[tab.id]}); // activeTab permission
+		}catch(e) {
+			onError(e);
 		}
-		browser.tabs.sendMessage(tab.id, {"hlDivTbls": true, "hlToggle": hlexportables[tab.id]});
 	}
 
-});
+}
 
 ['HTML', 'TEXT'].forEach( (val) => {
 	browser.menus.create({   // menus permission
@@ -43,21 +43,26 @@ browser.browserAction.onClicked.addListener( async (tab) => {
 		title: "Export as " + val.toUpperCase(),
 		documentUrlPatterns: [ "https://*/*", "http://*/*" ],
 		contexts: ["page", "link", "image", "editable" ],
-	},() => {
-		if(browser.runtime.lastError !== null){
-			onError(browser.runtime.lastError);
-		}
 	});
 });
 
-
-browser.menus.onClicked.addListener(async (onClickData, tab) => { // menus permission
-	if (onClickData.menuItemId.startsWith(extId)) {
-		browser.tabs.sendMessage(tab.id, { 
-			 "targetElementId": onClickData.targetElementId, 
-				    "mode": onClickData.menuItemId,
-		});
+async function onMenuClicked(clickData, tab) { 
+	if (typeof clickData.menuItemId === 'string' 
+		&& clickData.menuItemId.startsWith(extId)) {
+		browser.tabs.sendMessage(tab.id, {  // activeTab permission 
+			 "targetElementId": clickData.targetElementId, 
+				    "mode": clickData.menuItemId,
+		}).catch(onError);
 	}
-});
+}
 
-
+try {
+	// set Badge Background Color 
+	browser.browserAction.setBadgeBackgroundColor({color: "green"}); // menu permission
+	// Register Listeners 
+	browser.tabs.onUpdated.addListener(onUpdated); // activeTab permission
+	browser.menus.onClicked.addListener(onMenuClicked); // menu permission
+	browser.browserAction.onClicked.addListener(onBrowserActionClicked); // menu permission
+}catch(e){
+	onError(e);
+}
