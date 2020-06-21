@@ -6,8 +6,9 @@ jobs:
     steps:
     - name: Checkout 
       uses: actions/checkout@v2 
-    - name: set artversion
+    - name: set reponame
       run: echo "::set-env name=REPONAME::$(basename `pwd`)"
+    - name: set artversion
       run: echo "::set-env name=ARTVERSION::$(grep '"version"' ./src/manifest.json  | cut -d'"' -f4)"
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
