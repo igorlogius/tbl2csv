@@ -6,10 +6,10 @@ jobs:
     steps:
     - name: Checkout 
       uses: actions/checkout@v2 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
     - name: set artversion
       run: echo "::set-env name=ARTVERSION::$(grep '"version"' ./src/manifest.json  | cut -d'"' -f4)"
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
       with:
         name: ${{ env.ARTVERSION }}
         path: ./src/
