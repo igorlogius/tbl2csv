@@ -19,7 +19,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: Release ${{ env.REPONAME }}-${{ env.ARTVERSION }}
         draft: false
         prerelease: false
     - name: Upload Release Asset
@@ -32,8 +32,8 @@ jobs:
         asset_path: ./${{ env.REPONAME }}-${{ env.ARTVERSION }}.xpi
         asset_name: ${{ env.REPONAME }}-${{ env.ARTVERSION }}.xpi
         asset_content_type: application/zip
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ env.REPONAME }}-${{ env.ARTVERSION }}.xpi
-        path: ./src/
+        #    - name: Upload Artifact
+        #      uses: actions/upload-artifact@v2
+        #      with:
+        #        name: ${{ env.REPONAME }}-${{ env.ARTVERSION }}.xpi
+        #        path: ./src/
