@@ -14,4 +14,4 @@
 #	eval "$WEBEXT_CMD"
 #fi
 
-zip -j "${NAME}-$(grep '"version"' ./src/manifest.json  | cut -d'"' -f4).xpi" ./src/*
+zip --junk-paths "$(basename `pwd`)-$(grep '"version"' src/manifest.json  | cut -d'"' -f4).xpi" src/*
