@@ -1,6 +1,6 @@
 {
     "name": "tbl2csv",
-    "description": "Adds a context menu item that allows to export tables or lists as csv as well as an toolbar button to highlight the exportable elements",
+    "description": "Save tables or lists as a comma seperated values (csv) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc) to do further processing and conversion (e.g. to xls or ods)",
     "version": "1.2.8",
     "manifest_version": 2,
     "icons": {

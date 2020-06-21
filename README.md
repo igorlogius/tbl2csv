@@ -1,20 +1,11 @@
-# tbl2csv 
+# tbl2csv a firefox/chrome webextension add-on
 
-## Description
-Adds a context menu item that allows to export tables or lists as csv as well as an toolbar button to highlight the exportable elements
-
-## Website
+## Details:
 https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/
 
-## Requirements
-- web-ext (https://github.com/mozilla/web-ext)
-
-## Build Ext. Package
-```bash
-git clone https://github.com/igorlogius/tbl2csv.git
-cd tbl2csv
-./build.sh
+## Usage:  
+wget https://github.com/igorlogius/tbl2csv/archive/master.zip
+unzip master.zip
+zip -j "tbl2csv-$(grep '"version"' tbl2csv-master/src/manifest.json  | cut -d'"' -f4).xpi" ./tbl2csv-master/src/*
 ```
-
-Import tbl2csv-x.y.z.zip into your browser via `about:debugging`
-
+Import tbl2csv-x.y.z.zip into your browser (e.g. via `about:debugging`)
