@@ -1,7 +1,0 @@
-
-# HARDLINK FILE ln -P edit only in `build-web-ext`
-
-/node_modules/
-/*.zip
-/package-lock.json
-/build-web-ext/
