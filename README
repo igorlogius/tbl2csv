@@ -1,0 +1,12 @@
+
+# Details
+# https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/
+
+# Build
+wget https://github.com/igorlogius/tbl2csv/archive/master.zip
+unzip -d tbl2csv -j master.zip
+zip "tbl2csv-$(grep '"version"' tbl2csv/manifest.json  | cut -d'"' -f4).xpi" ./tbl2csv/*
+
+# Clean
+rm master.zip && rm ./tbl2csv/* && rmdir ./tbl2csv/
+
