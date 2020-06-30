@@ -1,12 +1,32 @@
+#!/bin/bash
 
 # Details
 # https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/
 
-# Build
-wget https://github.com/igorlogius/tbl2csv/archive/master.zip
-unzip -d tbl2csv -j master.zip
-zip "tbl2csv-$(grep '"version"' tbl2csv/manifest.json  | cut -d'"' -f4).xpi" ./tbl2csv/*
+MISSING_REQ=0
+for req in mktemp wget unzip zip grep cut date;do
+	type $req >/dev/null 2>&1 || { echo >&2 "Missing dependency: $req"; MISSING_REQ=1; }
+done
 
-# Clean
-rm master.zip && rm ./tbl2csv/* && rmdir ./tbl2csv/
+[ $MISSING_REQ -ne 0 ] && { echo "Aborting because of missing dependency"; exit 1; }
+
+# create tmp storage
+ZIPFILE=$(mktemp)
+EXTRDIR=$(mktemp -d)
+
+# download
+wget -q --show-progress 'https://github.com/igorlogius/tbl2csv/archive/master.zip' -O $ZIPFILE
+
+# extract without paths and README
+unzip -j $ZIPFILE -d $EXTRDIR -x "*/README"
+
+# re-pack as xpi (zip) without paths and extended file attributes 
+XPI="tbl2csv-$(grep '"version"' $EXTRDIR/manifest.json |cut -d'"' -f4)-$(date '+%F_%T').xpi" 
+zip -X -j $XPI $EXTRDIR/*
+
+# remove tmp storage
+rm -f $EXTRDIR/* && rmdir $EXTRDIR/
+
+# show conent of xpi
+unzip -l $XPI
 
