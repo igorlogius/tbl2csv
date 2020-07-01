@@ -1,10 +1,10 @@
 {
     "background": { "scripts": ["background.js"] },
-    "browser_action": { "default_icon": "icon.png", "default_title": "highlight exports" },
+    "browser_action": { "browser_style": true, "default_icon": "icon.png", "default_title": "highlight exports" },
     "description": "save tables or lists as a comma seperated values (csv) file",
     "icons": { "128": "icon.png" },
     "manifest_version": 2,
     "name": "tbl2csv",
-    "permissions": [ "menus", "activeTab" ],
-    "version": "1.2.9"
+    "permissions": [ "menus", "activeTab", "notifications" ],
+    "version": "1.2.10"
 }
