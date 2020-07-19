@@ -4,17 +4,17 @@ const extId = 'tbl2csv';
 let hlexportables = {};
 
 async function showNotification(title,message){
-  const id = "blubber";
+  const id = extId;
   const options = {
         "type": "basic",
+	"iconUrl": browser.runtime.getURL("icon.png"),
         "title": extId + ": " + title,
         "message": message
       };
   try {
-    const notificationId = await browser.notifications.create(id, options);
+    await browser.notifications.create(id, options);
   }catch(err){
     onError(err, 'failed notificationId.create');
-    return;
   }
 }
 
@@ -61,7 +61,6 @@ async function onBrowserActionClicked(tab) {
       await browser.tabs.sendMessage(tab.id, {"hlDivTbls": true, "hlToggle": hlexportables[tab.id]}); // activeTab permission
     }catch(e){
       onError(e, 'failed sendMessage');
-      return;
     }
   }
 

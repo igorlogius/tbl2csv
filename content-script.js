@@ -63,7 +63,9 @@
 				const data = getDataFromNode(td);
 				row.push('"' + data + '"');
 				// add colspan padding
-				for(var i=1, n=td.getAttribute("colspan"); i < n; row.push('""'), i++);
+				for(let i=1, n=td.getAttribute("colspan"); i < n; i++){
+					row.push('""');
+				}
 			});
 			// skip rows without cells
 			if(row.length > 0) {
@@ -128,10 +130,10 @@
 		ele.className += " "+cls;
 	}
 
-	function delClass(ele,cls) {
-		var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
+	/*function delClass(ele,cls) {
+		const reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
 		ele.className=ele.className.replace(reg,' ');
-	}
+	} */
 
 
 	// register message listener 
@@ -140,7 +142,7 @@
 
 		if(message.hlDivTbls) {
 			highlightDivTables(); // re-add class for ajax sites which change stuff 
-			var sheet = window.document.styleSheets[0];
+			let sheet = window.document.styleSheets[0];
 			if(message.hlToggle) {
 				sheet.insertRule(highlightCSS, 0);
 			}else{
