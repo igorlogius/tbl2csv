@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Details
-# https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/
+# https://addons.mozilla.org/en-US/firefox/addon/tbl2csv
 
+# check requirements
 MISSING_REQ=0
 for req in mktemp wget unzip zip grep cut date;do
 	type $req >/dev/null 2>&1 || { echo >&2 "Missing dependency: $req"; MISSING_REQ=1; }
@@ -14,7 +15,7 @@ done
 ZIPFILE=$(mktemp)
 EXTRDIR=$(mktemp -d)
 
-# download
+# download latest source
 wget -q --show-progress 'https://github.com/igorlogius/tbl2csv/archive/master.zip' -O $ZIPFILE
 
 # extract without paths and README
@@ -27,6 +28,6 @@ zip -X -j $XPI $EXTRDIR/*
 # remove tmp storage
 rm -f $EXTRDIR/* && rmdir $EXTRDIR/
 
-# show conent of xpi
+# show content of xpi
 unzip -l $XPI
 
