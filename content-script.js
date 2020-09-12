@@ -44,7 +44,7 @@
 					}
 				});
 				if(row.length > 0) {
-					csv.push(row.join(';'));
+					csv.push(row.join(','));
 				}
 			}
 		});
