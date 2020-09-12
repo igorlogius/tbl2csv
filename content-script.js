@@ -6,6 +6,7 @@
 
 	// export type (text,html)
 	let mode = "text";
+	const seperator = ",";
 
 	// add empty data link
 	let link = document.createElement('a');
@@ -44,7 +45,7 @@
 					}
 				});
 				if(row.length > 0) {
-					csv.push(row.join(','));
+					csv.push(row.join(seperator));
 				}
 			}
 		});
@@ -69,7 +70,7 @@
 			});
 			// skip rows without cells
 			if(row.length > 0) {
-				csv.push(row.join(';'));
+				csv.push(row.join(seperator));
 			}
 		});
 		return csv.join('\n');
