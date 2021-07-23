@@ -23,7 +23,7 @@ wget -q --show-progress "https://github.com/igorlogius/$ID/archive/$BRANCH.zip" 
 unzip -j $ZIPFILE -d $EXTRDIR -x "*/README"
 
 # re-pack as xpi (zip) without paths and extended file attributes 
-XPI="$ID-$(grep '"version"' $EXTRDIR/manifest.json |cut -d'"' -f4)-$(date '+%F_%T').xpi" 
+XPI="$ID-$(grep '"version"' $EXTRDIR/manifest.json |cut -d'"' -f4)-$(date '+%F_%H-%M').xpi" 
 zip -X -j $XPI $EXTRDIR/*
 
 # remove tmp storage
@@ -33,3 +33,5 @@ rm -f $EXTRDIR/* && rmdir $EXTRDIR/
 unzip -l $XPI
 
 echo "Homepage: https://addons.mozilla.org/en-US/firefox/addon/$ID"
+# conditional export of artifact name for github release workflow 
+[ -z ${GITHUB_ENV+x} ] || { echo "ARTNAME=$XPI" >> $GITHUB_ENV; }
