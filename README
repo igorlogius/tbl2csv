@@ -2,7 +2,7 @@
 
 # variables
 ID="tbl2csv"
-BRANCH="master"
+BRANCH="main"
 
 # check requirements
 MISSING_REQ=0
