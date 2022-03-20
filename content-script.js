@@ -1,8 +1,15 @@
 (function(){
-	if (typeof window.tbl2csv_hasRun !== 'undefined'){
-		return;
-	}
-	window.tbl2csv_hasRun = true;
+
+    if (typeof window.tbl2csv_hasRun !== 'undefined'){
+               return;
+    }
+    window.tbl2csv_hasRun = true;
+
+    var tableStyleSheet = document.createElement("style");
+    document.head.appendChild(tableStyleSheet);
+	const highlightCSS = `.divTbl, ol, ul, table { border: 3px dotted red !important; padding:1px !important; margin:1px !important; }`;
+    tableStyleSheet.sheet.insertRule(highlightCSS, 0);
+    tableStyleSheet.disabled = true;
 
 	// export type (text,html)
 	let mode = "text";
@@ -20,12 +27,12 @@
 	const re_break = new RegExp('(\r\n|\n|\r)','gm');
 	const re_space = new RegExp('(\s\s)','gm');
 	const tblrowdsps = ['table-row', 'table-header-group', 'table-footer-group' ];
-	const highlightCSS = `.divTbl, ol, ul, table { border: 3px dotted red !important; padding:1px !important; margin:1px !important; }`;
+    let hlon = false;
 	const convert = {
-		'DIV': div2csv,
-		'TABLE': table2csv,
-		'UL': list2csv, 
-		'OL': list2csv
+		'div': div2csv,
+		'table': table2csv,
+		'ul': list2csv,
+		'ol': list2csv
 	};
 
 	function getDataFromNode(node) {
@@ -86,13 +93,15 @@
 	}
 
 	function getClosestExportableParent(node){
-		while(	
-			node !== null 
-			&& node.tagName !== 'TABLE'
-			&& node.tagName !== 'OL'
-			&& node.tagName !== 'UL'
+		while(
+			node !== null
+            && typeof node.tagName === 'string'
+			&& node.tagName.toLowerCase() !== 'table'
+			&& node.tagName.toLowerCase() !== 'ol'
+			&& node.tagName.toLowerCase() !== 'ul'
 		) {
-			if( node.tagName === 'DIV' && getStyle(node,'display') === 'table' ){
+            console.log(node.tagName);
+			if( node.tagName.toLowerCase() === 'div' && getStyle(node,'display') === 'table' ){
 				break;
 			}
 			node = node.parentNode;
@@ -137,18 +146,15 @@
 	} */
 
 
-	// register message listener 
+	// register message listener
 	browser.runtime.onMessage.addListener( (message) => {
+        console.log('content-scirpt got message');
 		if(message.isOn) { return true; }
 
 		if(message.hlDivTbls) {
-			highlightDivTables(); // re-add class for ajax sites which change stuff 
+            tableStyleSheet.disabled = !tableStyleSheet.disabled;
+			highlightDivTables(); // re-add class for ajax sites which change stuff
 			let sheet = window.document.styleSheets[0];
-			if(message.hlToggle) {
-				sheet.insertRule(highlightCSS, 0);
-			}else{
-				sheet.deleteRule(0);
-			}
 			return;
 		}
 

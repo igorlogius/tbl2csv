@@ -23,13 +23,13 @@ function onError(e, msg){
 	console.log(`${extId}::onError error: ${e}, message: ${msg}`);
 }
 
-async function onUpdated(tabId, changeInfo, tabInfo) { 
+async function onUpdated(tabId, changeInfo, tabInfo) {
 
 	if(typeof tabId === 'undefined' ) { return; }
 
 	try {
 		await browser.tabs.sendMessage(tabId, {"isOn": true}).then( () => {  // activeTab permission
-			hlexportables[tabId] = true; 
+			hlexportables[tabId] = true;
 			browser.browserAction.setBadgeText({"text": "on", "tabId": tabId}); // menus permission
 		});
 	}catch(err) {
@@ -38,26 +38,27 @@ async function onUpdated(tabId, changeInfo, tabInfo) {
 	}
 }
 
-async function onBrowserActionClicked(tab) { 
+async function onBrowserActionClicked(tab) {
 
 	if(typeof tab.id === 'undefined' ) { return; }
 
-	try { 
-		await browser.tabs.executeScript({file: 'content-script.js'}); // activeTab permission
+	try {
+		await browser.tabs.executeScript(tab.id, {file: 'content-script.js'}); // activeTab permission
+        console.log("Script injected");
 	}catch(e){
 		onError(e, 'failed background.js::onBrowserActionClicked()::browser.tabs.executeScript()');
 		await showNotification('failed to execute', 'Execution failed, some mozilla sites are protected, navigate somewhere else!\n Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts');
 		return;
 	}
-	if(typeof hlexportables[tab.id] === 'undefined') { 
+	if(typeof hlexportables[tab.id] === 'undefined') {
 		browser.browserAction.setBadgeText({"text": "on", "tabId": tab.id}); // menu permission
-		hlexportables[tab.id] = true; 
-	}else { 
+		hlexportables[tab.id] = true;
+	}else {
 		browser.browserAction.setBadgeText({"text": "", "tabId": tab.id}); // menu permission
 		delete hlexportables[tab.id];
 	}
 
-	try { 
+	try {
 		await browser.tabs.sendMessage(tab.id, {"hlDivTbls": true, "hlToggle": hlexportables[tab.id]}); // activeTab permission
 	}catch(e){
 		onError(e, 'failed background.js::onBrowserActionClicked()::browser.tabs.sendMessage()');
@@ -65,14 +66,14 @@ async function onBrowserActionClicked(tab) {
 
 }
 
-async function onMenuClicked(clickData, tab) { 
+async function onMenuClicked(clickData, tab) {
 
 	if ( typeof clickData.menuItemId !== 'string' ) { return; }
 	if ( !clickData.menuItemId.startsWith(extId) ) { return; }
 
 	try {
-		await browser.tabs.sendMessage(tab.id, {  // activeTab permission 
-			"targetElementId": clickData.targetElementId, 
+		await browser.tabs.sendMessage(tab.id, {  // activeTab permission
+			"targetElementId": clickData.targetElementId,
 			"mode": clickData.menuItemId,
 		});
 	}catch(e){
@@ -91,10 +92,10 @@ async function onMenuClicked(clickData, tab) {
 	});
 });
 
-// set Badge Background Color 
+// set Badge Background Color
 browser.browserAction.setBadgeBackgroundColor({color: "green"}); // menu permission
 
-// Register Listeners 
+// Register Listeners
 browser.tabs.onUpdated.addListener(onUpdated); // activeTab permission
 browser.menus.onClicked.addListener(onMenuClicked); // menu permission
 browser.browserAction.onClicked.addListener(onBrowserActionClicked); // menu permission
