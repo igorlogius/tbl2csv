@@ -19,7 +19,7 @@
 	let link = document.createElement('a');
 	link.style.display = 'none';
 	link.setAttribute('target', '_blank');
-	link.setAttribute('download', 'data.csv');
+	link.setAttribute('download', encodeURIComponent(document.location.href) + '.csv');
 	document.body.append(link);
 
 	// consts
@@ -100,7 +100,6 @@
 			&& node.tagName.toLowerCase() !== 'ol'
 			&& node.tagName.toLowerCase() !== 'ul'
 		) {
-            console.log(node.tagName);
 			if( node.tagName.toLowerCase() === 'div' && getStyle(node,'display') === 'table' ){
 				break;
 			}
@@ -148,7 +147,6 @@
 
 	// register message listener
 	browser.runtime.onMessage.addListener( (message) => {
-        console.log('content-scirpt got message');
 		if(message.isOn) { return true; }
 
 		if(message.hlDivTbls) {
@@ -165,7 +163,7 @@
 			alert('No exportable target found!\nHint: Click the toolbar icon to highlight exportable targets');
 			return;
 		}
-		const str = convert[exportableTarget.tagName](exportableTarget);
+		const str = convert[exportableTarget.tagName.toLowerCase()](exportableTarget);
 		link.setAttribute('href','data:text/csv;charset=utf-8,'+encodeURIComponent(str));
 		simulateClick(link);
 	});
