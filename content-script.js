@@ -14,6 +14,7 @@
 	// export type (text,html)
 	let mode = "text";
 	const seperator = ",";
+    const CRLF = '\r\n';
 
 	// add empty data link
 	let link = document.createElement('a');
@@ -56,7 +57,7 @@
 				}
 			}
 		});
-		return csv.join('\n');
+		return csv.join(CRLF);
 	}
 
 	function table2csv(tbl) {
@@ -80,7 +81,7 @@
 				csv.push(row.join(seperator));
 			}
 		});
-		return csv.join('\n');
+		return csv.join(CRLF);
 	}
 
 	function list2csv(ul) {
@@ -89,7 +90,7 @@
 			const data = getDataFromNode(li);
 			csv.push('"' + data + '"');
 		});
-		return csv.join('\n');
+		return csv.join(CRLF);
 	}
 
 	function getClosestExportableParent(node){
@@ -165,6 +166,11 @@
 		}
 		const str = convert[exportableTarget.tagName.toLowerCase()](exportableTarget);
 		link.setAttribute('href','data:text/csv;charset=utf-8,'+encodeURIComponent(str));
+        /*
+        link.href = window.URL.createObjectURL(new Blob([str], {
+            type: "text/csv"
+        }));
+        */
 		simulateClick(link);
 	});
 }());
