@@ -1,3 +1,6 @@
+/* global browser */
+/* eslint-disable no-useless-escape */
+
 (function(){
 
     if (typeof window.tbl2csv_hasRun !== 'undefined'){
@@ -25,10 +28,10 @@
 
 	// consts
 	const re_quote = new RegExp('"','gm');
-	const re_break = new RegExp('(\r\n|\n|\r)','gm');
+    const re_break = new RegExp('(\r\n|\n|\r)','gm');
 	const re_space = new RegExp('(\s\s)','gm');
 	const tblrowdsps = ['table-row', 'table-header-group', 'table-footer-group' ];
-    let hlon = false;
+
 	const convert = {
 		'div': div2csv,
 		'table': table2csv,
@@ -153,7 +156,6 @@
 		if(message.hlDivTbls) {
             tableStyleSheet.disabled = !tableStyleSheet.disabled;
 			highlightDivTables(); // re-add class for ajax sites which change stuff
-			let sheet = window.document.styleSheets[0];
 			return;
 		}
 

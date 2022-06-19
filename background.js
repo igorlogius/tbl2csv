@@ -1,3 +1,4 @@
+/* global browser */
 
 const extId = 'tbl2csv';
 
@@ -23,7 +24,7 @@ function onError(e, msg){
 	console.log(`${extId}::onError error: ${e}, message: ${msg}`);
 }
 
-async function onUpdated(tabId, changeInfo, tabInfo) {
+async function onUpdated(tabId /*, changeInfo, tabInfo*/) {
 
 	if(typeof tabId === 'undefined' ) { return; }
 

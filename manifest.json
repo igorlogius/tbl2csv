@@ -10,12 +10,12 @@
     "default_icon": "icon.png",
     "default_title": "highlight exports"
   },
-  "description": "save tables or lists as a comma seperated values (csv) file",
+  "description": "Save tables or lists as a comma seperated values (csv) file",
   "icons": {
     "128": "icon.png"
   },
   "manifest_version": 2,
-  "name": "tbl2csv",
+  "name": "Table to CSV",
   "permissions": [
     "menus",
     "activeTab",
