@@ -6,11 +6,8 @@
     ]
   },
   "browser_action": {
-    "browser_style": true,
-    "default_icon": "icon.png",
-    "default_title": "highlight exports"
+    "default_icon": "icon.png"
   },
-  "description": "Save tables or lists as a comma seperated values (csv) file",
   "icons": {
     "128": "icon.png"
   },
@@ -21,5 +18,5 @@
     "activeTab",
     "notifications"
   ],
-  "version": "1.2.16"
+  "version": "1.2.17"
 }
