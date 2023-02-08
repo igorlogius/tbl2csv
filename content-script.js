@@ -160,6 +160,7 @@
 		}
 
 		mode = message.mode;
+
 		const clickTarget = browser.menus.getTargetElement(message.targetElementId);
 		const exportableTarget = getClosestExportableParent(clickTarget);
 		if(exportableTarget === null){
@@ -167,6 +168,8 @@
 			return;
 		}
 		const str = convert[exportableTarget.tagName.toLowerCase()](exportableTarget);
+
+		if(mode.startsWith('export')){
 		link.setAttribute('href','data:text/csv;charset=utf-8,'+encodeURIComponent(str));
         /*
         link.href = window.URL.createObjectURL(new Blob([str], {
@@ -174,5 +177,8 @@
         }));
         */
 		simulateClick(link);
+		}else{
+			navigator.clipboard.writeText(str);
+		}
 	});
 }());

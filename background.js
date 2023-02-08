@@ -1,6 +1,7 @@
 /* global browser */
 
-const extId = 'tbl2csv';
+const manifest = browser.runtime.getManifest();
+const extname = manifest.name;
 
 let hlexportables = {};
 
@@ -8,11 +9,11 @@ async function showNotification(title,message){
 	const options = {
 		"type": "basic",
 		"iconUrl": browser.runtime.getURL("icon.png"),
-		"title": extId + ": " + title,
+		"title": extname + ": " + title,
 		"message": message
 	};
 	try {
-		const nid = await browser.notifications.create(extId, options);
+		const nid = await browser.notifications.create(extname, options);
 		return nid;
 	}catch(err){
 		onError(err, 'failed notificationId.create');
@@ -21,7 +22,7 @@ async function showNotification(title,message){
 }
 
 function onError(e, msg){
-	console.log(`${extId}::onError error: ${e}, message: ${msg}`);
+	console.error(`${extname}::onError error: ${e}, message: ${msg}`);
 }
 
 async function onUpdated(tabId /*, changeInfo, tabInfo*/) {
@@ -29,12 +30,12 @@ async function onUpdated(tabId /*, changeInfo, tabInfo*/) {
 	if(typeof tabId === 'undefined' ) { return; }
 
 	try {
-		await browser.tabs.sendMessage(tabId, {"isOn": true}).then( () => {  // activeTab permission
+		await browser.tabs.sendMessage(tabId, {"isOn": true}).then( () => {  
 			hlexportables[tabId] = true;
-			browser.browserAction.setBadgeText({"text": "on", "tabId": tabId}); // menus permission
+			browser.browserAction.setBadgeText({"text": "on", "tabId": tabId}); 
 		});
 	}catch(err) {
-		browser.browserAction.setBadgeText({"text": "", "tabId": tabId}); // menus permission
+		browser.browserAction.setBadgeText({"text": "", "tabId": tabId}); 
 		delete hlexportables[tabId];
 	}
 }
@@ -44,7 +45,7 @@ async function onBrowserActionClicked(tab) {
 	if(typeof tab.id === 'undefined' ) { return; }
 
 	try {
-		await browser.tabs.executeScript(tab.id, {file: 'content-script.js'}); // activeTab permission
+		await browser.tabs.executeScript(tab.id, {file: 'content-script.js'}); 
         console.log("Script injected");
 	}catch(e){
 		onError(e, 'failed background.js::onBrowserActionClicked()::browser.tabs.executeScript()');
@@ -52,52 +53,45 @@ async function onBrowserActionClicked(tab) {
 		return;
 	}
 	if(typeof hlexportables[tab.id] === 'undefined') {
-		browser.browserAction.setBadgeText({"text": "on", "tabId": tab.id}); // menu permission
+		browser.browserAction.setBadgeText({"text": "on", "tabId": tab.id}); 
 		hlexportables[tab.id] = true;
 	}else {
-		browser.browserAction.setBadgeText({"text": "", "tabId": tab.id}); // menu permission
+		browser.browserAction.setBadgeText({"text": "", "tabId": tab.id}); 
 		delete hlexportables[tab.id];
 	}
 
 	try {
-		await browser.tabs.sendMessage(tab.id, {"hlDivTbls": true, "hlToggle": hlexportables[tab.id]}); // activeTab permission
+		await browser.tabs.sendMessage(tab.id, {"hlDivTbls": true, "hlToggle": hlexportables[tab.id]}); 
 	}catch(e){
 		onError(e, 'failed background.js::onBrowserActionClicked()::browser.tabs.sendMessage()');
 	}
 
 }
 
-async function onMenuClicked(clickData, tab) {
-
-	if ( typeof clickData.menuItemId !== 'string' ) { return; }
-	if ( !clickData.menuItemId.startsWith(extId) ) { return; }
-
-	try {
-		await browser.tabs.sendMessage(tab.id, {  // activeTab permission
-			"targetElementId": clickData.targetElementId,
-			"mode": clickData.menuItemId,
-		});
-	}catch(e){
-		onError(e, 'failed background.js::onMenuClicked()::browser.tabs.sendMessage()');
-	}
-}
-
-['HTML', 'TEXT'].forEach( (val) => {
+['Export HTML', 'Export TEXT', 'Copy HTML', 'Copy TEXT'].forEach( (val) => {
 	browser.menus.create({   // menus permission
-		id: extId + val.toLowerCase(),
-		title: "Export as " + val.toUpperCase(),
+		title: val,
 		documentUrlPatterns: [ "<all_urls>" ],
 		contexts: ["page", "link", "image", "editable" ],
+		onclick: async (info,tab) => {
+			try {
+				await browser.tabs.sendMessage(tab.id, {  
+					"targetElementId": info.targetElementId,
+					"mode": val.toLowerCase()
+				});
+			}catch(e){
+				onError(e, 'failed background.js::onMenuClicked()::browser.tabs.sendMessage()');
+			}
+		}
 	},function(e){
 		onError(e,"failed background.js::browser.menus.create()");
 	});
 });
 
 // set Badge Background Color
-browser.browserAction.setBadgeBackgroundColor({color: "green"}); // menu permission
+browser.browserAction.setBadgeBackgroundColor({color: "green"}); 
 
 // Register Listeners
-browser.tabs.onUpdated.addListener(onUpdated); // activeTab permission
-browser.menus.onClicked.addListener(onMenuClicked); // menu permission
-browser.browserAction.onClicked.addListener(onBrowserActionClicked); // menu permission
+browser.tabs.onUpdated.addListener(onUpdated); 
+browser.browserAction.onClicked.addListener(onBrowserActionClicked); 
 
