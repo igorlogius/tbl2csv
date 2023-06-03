@@ -2,11 +2,10 @@
   "author": "igorlogius",
   "homepage_url": "https://github.com/igorlogius/tbl2csv",
   "background": {
-    "scripts": [
-      "background.js"
-    ]
+    "scripts": ["background.js"]
   },
   "browser_action": {
+    "default_area": "navbar",
     "default_icon": "icon.png"
   },
   "icons": {
@@ -16,11 +15,6 @@
   "manifest_version": 2,
   "name": "Table to CSV",
   "description": "Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated values (CSV) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to xls or ods)",
-  "permissions": [
-    "clipboardWrite",
-    "menus",
-    "activeTab",
-    "notifications"
-  ],
-  "version": "1.3.17"
+  "permissions": ["clipboardWrite", "menus", "activeTab", "notifications"],
+  "version": "1.3.18"
 }
