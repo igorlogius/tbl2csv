@@ -30,8 +30,8 @@
 
   // consts
   const re_quote = new RegExp('"', "gm");
-  const re_break = new RegExp("(\r\n|\n|\r)", "gm");
-  const re_space = new RegExp("(ss)", "gm");
+  const re_break = new RegExp(/(\r\n|\n|\r)/, "gm");
+  const re_space = new RegExp(/\s+/, "gm");
   const tblrowdsps = ["table-row", "table-header-group", "table-footer-group"];
 
   const convert = {
@@ -44,9 +44,9 @@
   function getDataFromNode(node) {
     let data = mode.endsWith("html") ? node.innerHTML : node.innerText;
     return data
-      .trim()
-      .replace(re_break, "")
+      .replace(re_break, " ")
       .replace(re_space, " ")
+      .trim()
       .replace(re_quote, '""');
   }
 

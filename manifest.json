@@ -16,5 +16,5 @@
   "name": "Table to CSV",
   "description": "Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated values (CSV) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to xls or ods)",
   "permissions": ["clipboardWrite", "menus", "activeTab", "notifications"],
-  "version": "1.3.18"
+  "version": "1.3.19"
 }
