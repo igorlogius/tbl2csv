@@ -1,9 +1,9 @@
-Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated
-values (CSV) file which can be opened with any spreadsheet processor (e.g.
-excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to
-xls or ods) Technical, statistical or other data on the world wide web is
-sometimes only available as tables or lists. This add-on makes it very easy to
-save this data as a comma seperated values (csv) file.
+Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated values (CSV) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to xls or ods)
+
+Technical, statistical or other data on the world wide web is sometimes only available as tables or lists.
+This add-on makes it very easy to save this data as a comma seperated values (csv) file.
+
+https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a157cc317db
 
 
 
@@ -13,14 +13,21 @@ https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a
 
 <b>Usage:</b>
 <ol>
-  <li>Visit a site with table like data</li>
-  <li>
-    Click the extension toolbar icon to highlight and activate exportable
-    elements
-  </li>
-  <li>Right click into one of the highlighted areas</li>
-  <li>In the context menu select "tbl2csv" > "Export/Copy as TEXT/HTML"</li>
+    <li>Visit a site with table like data for example</li>
+    <li>Click the extension icon to highlight the exportable tables and lists</li>
+    <li>Right click inside one of the highlighted areas</li>
+    <li>In the context menu select "tbl2csv" > "Export as TEXT" or "Export as HTML"</li>
 </ol>
+
+<b>Difference between TEXT and HTML Export Mode</b>
+<ul>
+<li>TEXT: cell.innerText
+(ref. https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText )
+</li>
+<li>HTML := cell.innerHTML
+(ref. https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML )
+</li>
+</ul>
 
 <b>Notes:</b>
 <ol>
