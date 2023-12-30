@@ -1,14 +1,12 @@
 Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated values (CSV) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to xls or ods)
 
+
+<b>Short Demo Video:</b>
+
+https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a157cc317db
+
 Technical, statistical or other data on the world wide web is sometimes only available as tables or lists.
 This add-on makes it very easy to save this data as a comma seperated values (csv) file.
-
-https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a157cc317db
-
-
-
-https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a157cc317db
-
 
 
 <b>Usage:</b>
@@ -31,6 +29,10 @@ https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a
 
 <b>Notes:</b>
 <ol>
+    <li><b>Can/Should  i trust this addon?</b>
+        You can view the source code by either visiting the Homepage/Support Site or just saving/downloading the XPI (which is really just a ZIP Archive) and then extract it locally. The Sources in the XPI should be unofuscated and unminified (HTML,CSS and JS), so it's as easy to read as possible. Alternatives you can also use the <a href="https://addons.mozilla.org/en-US/firefox/addon/crxviewer/">CRX Viewer Extension by Rob W</a> to inspect the XPI sources. If you have an questions, you can also open an issue on the support site and i'll try and answer to the best of my abilities.
+        If you are no programmer and are still feeling unsure, you might want to visit one of the official or unoffical mozilla communities and ask if someone there with more knowlege can take a look. Examples: https://reddit.com/r/firefox , https://lemmy.world/c/firefox or https://chat.mozilla.org/#/room/#addons:mozilla.org
+    </li>
     <li><b>Permissions:</b>
         This add-on tries to use the minimal number of required permissions to successfully fullfill its intended purpose.
         If you think this could be improved please let me know by opening an issue and i will try to look into it.
