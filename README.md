@@ -3,7 +3,7 @@ Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated va
 
 <b>Short Demo Video:</b>
 
-https://github.com/igorlogius/tbl2csv/assets/67047467/15888c38-2a12-4eb1-a877-7a157cc317db
+https://github.com/igorlogius/tbl2csv/assets/67047467/df43f0a3-101c-4e82-8a24-74d2cc82b018
 
 Technical, statistical or other data on the world wide web is sometimes only available as tables or lists.
 This add-on makes it very easy to save this data as a comma seperated values (csv) file.
