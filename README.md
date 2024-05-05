@@ -1,5 +1,6 @@
 Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated values (CSV) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to xls or ods)
 
+### [Click here to report a bug, make a suggestion or ask a question](https://github.com/igorlogius/igorlogius/issues/new/choose)
 
 <b>Short Demo Video:</b>
 
@@ -17,7 +18,7 @@ This add-on makes it very easy to save this data as a comma seperated values (cs
     <li>In the context menu select "tbl2csv" > "Export as TEXT" or "Export as HTML"</li>
 </ol>
 
-<b>Difference between TEXT and HTML Export Mode</b>
+<b>Difference between TEXT and HTML export modes</b>
 <ul>
 <li>TEXT: cell.innerText
 (ref. https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText )
