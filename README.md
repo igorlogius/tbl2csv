@@ -1,5 +1,7 @@
 Save HTML Tables, CSS Pseudo/DIV Tables or Lists (UL/OL) as a comma seperated values (CSV) file which can be opened with any spreadsheet processor (e.g. excel, libreoffice-calc,gnumeric) for further processing and conversion (e.g. to xls or ods)
 
+[![](https://raw.githubusercontent.com/igorlogius/igorlogius/main/geFxAddon.png)](https://addons.mozilla.org/en-US/firefox/addon/tbl2csv/)
+
 ### [Click here to report a bug, make a suggestion or ask a question](https://github.com/igorlogius/igorlogius/issues/new/choose)
 
 <b>Short Demo Video:</b>
