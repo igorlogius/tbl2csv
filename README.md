@@ -11,7 +11,6 @@ https://github.com/igorlogius/tbl2csv/assets/67047467/df43f0a3-101c-4e82-8a24-74
 Technical, statistical or other data on the world wide web is sometimes only available as tables or lists.
 This add-on makes it very easy to save this data as a comma seperated values (csv) file.
 
-
 <b>Usage:</b>
 <ol>
     <li>Visit a site with table like data for example</li>

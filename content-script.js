@@ -24,7 +24,7 @@
   link.setAttribute("target", "_blank");
   link.setAttribute(
     "download",
-    encodeURIComponent(document.location.href) + ".csv"
+    encodeURIComponent(document.location.href) + ".csv",
   );
   document.body.append(link);
 
@@ -174,12 +174,12 @@
       mode = message.mode;
 
       const clickTarget = browser.menus.getTargetElement(
-        message.targetElementId
+        message.targetElementId,
       );
       const exportableTarget = getClosestExportableParent(clickTarget);
       if (exportableTarget === null) {
         alert(
-          "No exportable target found!\nHint: Click the toolbar icon to highlight exportable targets"
+          "No exportable target found!\nHint: Click the toolbar icon to highlight exportable targets",
         );
         return;
       }
@@ -189,7 +189,7 @@
       if (mode.startsWith("export")) {
         link.setAttribute(
           "href",
-          "data:text/csv;charset=utf-8," + encodeURIComponent(str)
+          "data:text/csv;charset=utf-8," + encodeURIComponent(str),
         );
         /*
         link.href = window.URL.createObjectURL(new Blob([str], {

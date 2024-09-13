@@ -11,13 +11,13 @@ async function onBrowserActionClicked(tab) {
     documentUrlPatterns: ["<all_urls>"],
     contexts: ["page", "link", "image", "editable"],
     onclick: async (info, tab) => {
-      await browser.tabs.executeScript(tab.id, { file: "content-script.js" });
       if (val.startsWith("Copy")) {
         const requiredPermission = { permissions: ["clipboardWrite"] };
         if (!(await browser.permissions.request(requiredPermission))) {
           return;
         }
       }
+      await browser.tabs.executeScript(tab.id, { file: "content-script.js" });
       await browser.tabs.sendMessage(tab.id, {
         action: "export",
         targetElementId: info.targetElementId,
